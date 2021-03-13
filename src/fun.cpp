@@ -60,23 +60,38 @@ unsigned int faStr2(const char *str)
 }
 unsigned int faStr3(const char *str)
 {
-    int k=0;
-    int i=0;
-    bool flag=0;
-    double sum=0.0;
-    while(str[i]!='\0'){
-        if(str[i] !=' ' && !flag){
+    double sum = 0.0;
+    int i = 0;
+    int k = 0;
+    int l = 0;
+    bool flag = 0;
+
+    while(str[i] != '\0')
+    {
+        if(!flag && str[i] != ' ')
+        {
+            flag = 1;
+            l++;
             k++;
-            flag=1;
         }
-        else if (str[i] !=' ' && flag)
-                sum++;
-        else if (str[i] !=' ')
-                flag = 0;
+        else if (flag && str[i] != ' ')
+        {
+            l++;
+        }
+        else
+        {
+            flag = 0;
+            sum += l;
+            l = 0;
+        }
         i++;
     }
-    sum= (sum+k)/k;
-    int sum1=sum;
-    if(sum-sum1 >= 0.5)    sum1++;
+    if(flag)
+        sum += l;
+    sum /= k;
+    int sum1 = sum;
+    if(sum - sum1 >= 0.5)
+       sum1++;
+
     return sum1;
 }
